@@ -167,14 +167,15 @@ class App extends React.Component {
                         {'&'}country=<span className="redText">{'{country}'}</span>
                     </div>
                     <div>
-                        <span className="redText">APIkey</span> = 1101600d8fa7e22bxxxxxxxxxxxxxxxxxxxxxxxxx จาก{' '}
+                        <span className="redText">APIkey</span> = 1101600d8fa7e22bxxxxxxxxxxxxxxxxxxxxxxxxx
+                        {' (required)'} from{' '}
                         <a href="https://smspincode.com/user/settings.php">https://smspincode.com/user/settings.php</a>{' '}
                     </div>
                     <div>
-                        <span className="redText">app</span> = foodpanda
+                        <span className="redText">app</span> = foodpanda {'(defualt)'}
                     </div>
                     <div>
-                        <span className="redText">country</span> = thailand
+                        <span className="redText">country</span> = thailand {'(defualt)'}
                     </div>
                 </div>
             </div>
