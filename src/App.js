@@ -5,6 +5,8 @@ import Item from './Item';
 
 class App extends React.Component {
     getNumberInterval;
+    sound = new Audio('https://smspincode.com/user/plucky.mp3');
+
     state = {
         params: {
             apikey: '',
@@ -34,6 +36,12 @@ class App extends React.Component {
         this.setState({ lastErrorMessage: error });
     };
 
+    playSound = () => {
+        this.sound.pause();
+        this.sound.currentTime = 0;
+        this.sound.play();
+    };
+
     refresh = async () => {
         try {
             const { params } = this.state;
@@ -51,6 +59,7 @@ class App extends React.Component {
         try {
             const { params } = this.state;
             await getNewNumber(params);
+            this.playSound();
         } catch (err) {
             this.setErrorMessage(err);
         }
@@ -82,6 +91,7 @@ class App extends React.Component {
         try {
             const { params } = this.state;
             await getMessage(params, number);
+            this.playSound();
         } catch (err) {
             this.setErrorMessage(err);
         }
