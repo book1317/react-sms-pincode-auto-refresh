@@ -1,38 +1,85 @@
 .App {
-  text-align: center;
+    padding: 26px;
+    text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.title {
+    font-size: 32px;
+    font-weight: 700;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.subTitle {
+    margin: 10px 0px;
+    font-weight: 500;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.refreshButton {
+    position: relative;
+    margin-left: 6px;
 }
 
-.App-link {
-  color: #61dafb;
+.loading {
+    position: absolute;
+    margin-left: 6px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.errorMessage {
+    margin: 20px 0px;
+    color: red;
+}
+
+.table {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.headTableButton {
+    background-color: #dddddd;
+    font-weight: bold;
+    min-width: 30px;
+}
+
+.headTableCode {
+    background-color: #dddddd;
+    font-weight: bold;
+    min-width: 150px;
+}
+
+.headTable {
+    background-color: #dddddd;
+    font-weight: bold;
+    min-width: 50px;
+}
+
+.item {
+    display: flex;
+    margin-top: 6px;
+}
+
+.itemMessage {
+    margin-left: 16px;
+}
+
+.itemCode {
+    line-break: anywhere;
+    max-width: 200px;
+}
+
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.getButton {
+    display: flex;
+    justify-content: center;
 }
