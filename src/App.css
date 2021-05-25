@@ -83,3 +83,16 @@ table {
     display: flex;
     justify-content: center;
 }
+
+.redText {
+    color: blue;
+}
+
+.howtoTitle {
+    font-weight: bold;
+}
+
+.howto {
+    margin-top: 20px;
+    text-align: left;
+}

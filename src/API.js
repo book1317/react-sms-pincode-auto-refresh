@@ -3,12 +3,18 @@ export const getNewNumber = async (params) => {
     return new Promise((resolve, reject) => {
         fetch(
             `http://api.smspincode.com/user/api/get_number.php?customer=${apikey}&app=${app}&country=${country}`
-        ).then((res) => {
+        ).then(async (res) => {
             console.log(res);
-            if (!res.ok) {
-                reject(res);
+            if (res.ok) {
+                console.log('this');
+                const result = await res.json();
+                console.log(result);
+                if (result) {
+                    resolve(res);
+                }
             }
-            resolve(res);
+            console.log('this');
+            reject(res);
         });
     });
 };
@@ -36,12 +42,14 @@ export const getMessage = async (params, number) => {
     return new Promise((resolve, reject) => {
         fetch(
             `http://api.smspincode.com/user/api/get_sms.php?customer=${apikey}&number=${number}&app=${app}&country=${country}`
-        ).then((res) => {
+        ).then(async (res) => {
             console.log(res);
-            if (!res.ok) {
-                reject(res);
+            if (res.ok) {
+                const result = await res.json();
+                console.log(result);
+                resolve(result);
             }
-            resolve(res);
+            reject(res);
         });
     });
 };

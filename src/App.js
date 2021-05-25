@@ -61,6 +61,7 @@ class App extends React.Component {
             await getNewNumber(params);
             this.playSound();
         } catch (err) {
+            console.log('this');
             this.setErrorMessage(err);
         }
         this.refresh();
@@ -106,7 +107,19 @@ class App extends React.Component {
             <div className="App">
                 <div className="title">BooKy SMS Pincode</div>
                 <div className="subTitle">
-                    <div>Key : {apikey}</div>
+                    <div>
+                        Key :{' '}
+                        {apikey ? (
+                            apikey
+                        ) : (
+                            <span>
+                                {'ไปใส่ APIKey ด้วย -> '}
+                                <a href="https://smspincode.com/user/settings.php">
+                                    https://smspincode.com/user/settings.php
+                                </a>
+                            </span>
+                        )}
+                    </div>
                     <div>
                         {app} : {country}
                     </div>
@@ -144,6 +157,25 @@ class App extends React.Component {
                                 ))}
                         </tbody>
                     </table>
+                </div>
+                <div className="howto">
+                    <div className="howtoTitle">วิธีใช้ ใส่ลิงค์ตามนี้</div>
+                    <div>
+                        https://book1317.github.io/react-sms-pincode-auto-refresh?key=
+                        <span className="redText">{'{APIkey}'}</span>
+                        {'&'}app=<span className="redText">{'{app}'}</span>
+                        {'&'}country=<span className="redText">{'{country}'}</span>
+                    </div>
+                    <div>
+                        <span className="redText">APIkey</span> = 1101600d8fa7e22bxxxxxxxxxxxxxxxxxxxxxxxxx จาก{' '}
+                        <a href="https://smspincode.com/user/settings.php">https://smspincode.com/user/settings.php</a>{' '}
+                    </div>
+                    <div>
+                        <span className="redText">app</span> = foodpanda
+                    </div>
+                    <div>
+                        <span className="redText">country</span> = thailand
+                    </div>
                 </div>
             </div>
         );
