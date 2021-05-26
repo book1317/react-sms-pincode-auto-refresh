@@ -53,3 +53,20 @@ export const getMessage = async (params, number) => {
         });
     });
 };
+
+export const getMoney = async (params, number) => {
+    const { apikey, app, country } = params;
+    return new Promise((resolve, reject) => {
+        fetch(`https://api.smspincode.com/user/api/get_balance.php?customer=${apikey}`).then(async (res) => {
+            console.log(res);
+            if (res.ok) {
+                const result = await res.json();
+                if (result) {
+                    resolve(result.balance);
+                }
+                resolve();
+            }
+            reject(res);
+        });
+    });
+};

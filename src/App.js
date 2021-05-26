@@ -1,5 +1,5 @@
 import React from 'react';
-import { getNewNumber, getAllNumber, getMessage } from './API';
+import { getNewNumber, getAllNumber, getMessage, getMoney } from './API';
 import './App.css';
 import Item from './Item';
 
@@ -18,6 +18,7 @@ class App extends React.Component {
         timeGetNumber: 5,
         isGetNumber: false,
         lastErrorMessage: '',
+        money: '',
     };
 
     async componentDidMount() {
@@ -47,8 +48,9 @@ class App extends React.Component {
             const { params } = this.state;
 
             this.setState({ isLoading: true });
+            const money = await getMoney(params);
             const allNumber = await getAllNumber(params);
-            this.setState({ allNumber });
+            this.setState({ allNumber, money });
         } catch (err) {
             this.setErrorMessage(err);
         }
@@ -59,12 +61,23 @@ class App extends React.Component {
         try {
             const { params } = this.state;
             await getNewNumber(params);
+            this.refresh();
             this.playSound();
         } catch (err) {
             console.log('this');
             this.setErrorMessage(err);
         }
-        this.refresh();
+    };
+
+    getMessage = async (number) => {
+        try {
+            const { params } = this.state;
+            await getMessage(params, number);
+            this.refresh();
+            this.playSound();
+        } catch (err) {
+            this.setErrorMessage(err);
+        }
     };
 
     onClickGetNewNumber = async () => {
@@ -88,19 +101,8 @@ class App extends React.Component {
         this.setState({ isGetNumber: !isGetNumber });
     };
 
-    getMessage = async (number) => {
-        try {
-            const { params } = this.state;
-            await getMessage(params, number);
-            this.playSound();
-        } catch (err) {
-            this.setErrorMessage(err);
-        }
-        this.refresh();
-    };
-
     render() {
-        const { allNumber, isLoading, isGetNumber, timeGetNumber, params, lastErrorMessage } = this.state;
+        const { allNumber, isLoading, isGetNumber, timeGetNumber, params, lastErrorMessage, money } = this.state;
         const { apikey, app, country } = params;
 
         return (
@@ -123,6 +125,7 @@ class App extends React.Component {
                     <div>
                         {app} : {country}
                     </div>
+                    <div className="greenText">Money : {money}$</div>
                 </div>
                 {/* <Input label="API Key" /> */}
                 <button onClick={this.onClickGetNewNumber}>Get Number{isGetNumber && ':' + timeGetNumber}</button>
@@ -152,8 +155,8 @@ class App extends React.Component {
                                 <td className="headTable">App</td>
                             </tr>
                             {allNumber.length > 0 &&
-                                allNumber.map((item, index) => (
-                                    <Item key={index} item={item} getMessage={this.getMessage} />
+                                allNumber.map((item) => (
+                                    <Item key={item.timestamp} item={item} getMessage={this.getMessage} />
                                 ))}
                         </tbody>
                     </table>
