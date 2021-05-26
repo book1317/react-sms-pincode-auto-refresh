@@ -1,4 +1,5 @@
 import React from 'react';
+import CopyButton from './CopyButton';
 
 class Item extends React.Component {
     getMessageInterval;
@@ -50,7 +51,7 @@ class Item extends React.Component {
                 </td>
 
                 <td>
-                    <div>{item.number}</div>
+                    <CopyButton>{item.number}</CopyButton>
                 </td>
                 <td className="itemCode">
                     <div>{item.message}</div>

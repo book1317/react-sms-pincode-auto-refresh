@@ -180,6 +180,7 @@ class App extends React.Component {
                             'ลาดพร้ว ซ.1 แยก 8 เกือบสุดซอย หน้าตึกเขียนว่าสมคิดแมนชั่น ถึงแล้วโทรมาเบอร์นี้ 0884015974 ครับ'}
                     </CopyButton>
                     <CopyButton>HOORAY100</CopyButton>
+                    <CopyButton>FPDSS100</CopyButton>
                     <CopyButton>godoffood001@gmail.com</CopyButton>
                 </div>
 
@@ -214,6 +215,16 @@ class App extends React.Component {
                     <div>
                         <span className="redText">address3</span>
                     </div>
+
+                    <a
+                        style={{ marginTop: '10px', display: 'block' }}
+                        onClick={() => {
+                            window.open('https://www.foodpanda.co.th/contents/deals');
+                        }}
+                        href="#"
+                    >
+                        https://www.foodpanda.co.th/contents/deals
+                    </a>
                 </div>
             </div>
         );
