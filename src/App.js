@@ -2,6 +2,7 @@ import React from 'react';
 import { getNewNumber, getAllNumber, getMessage, getMoney } from './API';
 import './App.css';
 import Item from './Item';
+import CopyButton from './CopyButton';
 
 class App extends React.Component {
     getNumberInterval;
@@ -12,6 +13,9 @@ class App extends React.Component {
             apikey: '',
             app: '',
             country: '',
+            address1: '',
+            address2: '',
+            address3: '',
         },
         allNumber: [],
         isLoading: true,
@@ -26,7 +30,10 @@ class App extends React.Component {
         const apikey = urlParams.get('key');
         const app = urlParams.get('app') || 'foodpanda';
         const country = urlParams.get('country') || 'thailand';
-        const params = { apikey, app, country };
+        const address1 = urlParams.get('address1');
+        const address2 = urlParams.get('address2');
+        const address3 = urlParams.get('address3');
+        const params = { apikey, app, country, address1, address2, address3 };
 
         await this.setState({ params });
         await this.refresh();
@@ -103,7 +110,7 @@ class App extends React.Component {
 
     render() {
         const { allNumber, isLoading, isGetNumber, timeGetNumber, params, lastErrorMessage, money } = this.state;
-        const { apikey, app, country } = params;
+        const { apikey, app, country, address1, address2, address3 } = params;
 
         return (
             <div className="App">
@@ -161,13 +168,31 @@ class App extends React.Component {
                         </tbody>
                     </table>
                 </div>
+
+                <div className="howto">
+                    <div className="howtoTitle">ข้อมูล {'(กดเพื่อคัดลอก)'}</div>
+                    <CopyButton>
+                        {address1 || '19 Lat Phrao 1 Alley, Lane 8 Khwaeng Chom Phon Krung Thep Maha Nakhon 10900'}
+                    </CopyButton>
+                    <CopyButton>{address2 || 'สมคิดแมนชั่น ตึกสีเทา'}</CopyButton>
+                    <CopyButton>
+                        {address3 ||
+                            'ลาดพร้ว ซ.1 แยก 8 เกือบสุดซอย หน้าตึกเขียนว่าสมคิดแมนชั่น ถึงแล้วโทรมาเบอร์นี้ 0884015974 ครับ'}
+                    </CopyButton>
+                    <CopyButton>HOORAY100</CopyButton>
+                    <CopyButton>godoffood001@gmail.com</CopyButton>
+                </div>
+
                 <div className="howto">
                     <div className="howtoTitle">วิธีใช้ ใส่ลิงค์ตามนี้</div>
-                    <div>
+                    <div className="example">
                         https://book1317.github.io/react-sms-pincode-auto-refresh?key=
                         <span className="redText">{'{APIkey}'}</span>
                         {'&'}app=<span className="redText">{'{app}'}</span>
                         {'&'}country=<span className="redText">{'{country}'}</span>
+                        {'&'}address1=<span className="redText">{'{address1}'}</span>
+                        {'&'}address2=<span className="redText">{'{address2}'}</span>
+                        {'&'}address3=<span className="redText">{'{address3}'}</span>
                     </div>
                     <div>
                         <span className="redText">APIkey</span> = 1101600d8fa7e22bxxxxxxxxxxxxxxxxxxxxxxxxx
@@ -179,6 +204,15 @@ class App extends React.Component {
                     </div>
                     <div>
                         <span className="redText">country</span> = thailand {'(defualt)'}
+                    </div>
+                    <div>
+                        <span className="redText">address1</span>
+                    </div>
+                    <div>
+                        <span className="redText">address2</span>
+                    </div>
+                    <div>
+                        <span className="redText">address3</span>
                     </div>
                 </div>
             </div>

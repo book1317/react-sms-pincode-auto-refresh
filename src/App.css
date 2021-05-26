@@ -93,10 +93,23 @@ table {
 }
 
 .howto {
+    /* display: flex; */
+    /* flex-direction: column; */
     margin-top: 20px;
     text-align: left;
 }
 
 .greenText {
     color: green;
+}
+
+.copyButton {
+    display: inline-block;
+    transition: 0.2s;
+    cursor: pointer;
+}
+
+.example {
+    font-weight: 500;
+    margin-bottom: 10px;
 }
