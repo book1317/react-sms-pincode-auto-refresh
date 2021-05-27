@@ -7,7 +7,13 @@ class Item extends React.Component {
     state = { isRefresh: false, time: 3 };
 
     getMessage = async (number) => {
-        await this.props.getMessage(number);
+        await this.props.getMessage(number, this.callback);
+    };
+
+    callback = () => {
+        console.log('callback');
+        clearInterval(this.getMessageInterval);
+        this.setState({ isRefresh: false });
     };
 
     onClickGetMessage = async (number) => {

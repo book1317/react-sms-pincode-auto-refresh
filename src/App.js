@@ -67,22 +67,33 @@ class App extends React.Component {
     getNewNumber = async () => {
         try {
             const { params } = this.state;
-            await getNewNumber(params);
-            this.refresh();
-            this.playSound();
+            const result = await getNewNumber(params);
+
+            if (result) {
+                console.log('result', result);
+                this.setState({ isGetNumber: false });
+                clearInterval(this.getNumberInterval);
+                this.refresh();
+                this.playSound();
+            }
         } catch (err) {
-            console.log('this');
             this.setErrorMessage(err);
         }
     };
 
-    getMessage = async (number) => {
+    getMessage = async (number, callback) => {
         try {
             const { params } = this.state;
-            await getMessage(params, number);
-            this.refresh();
-            this.playSound();
+            const result = await getMessage(params, number);
+
+            if (result) {
+                console.log(result);
+                callback();
+                this.refresh();
+                this.playSound();
+            }
         } catch (err) {
+            console.log('catch');
             this.setErrorMessage(err);
         }
     };
