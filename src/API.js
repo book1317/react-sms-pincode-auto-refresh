@@ -4,16 +4,13 @@ export const getNewNumber = async (params) => {
         fetch(
             `http://api.smspincode.com/user/api/get_number.php?customer=${apikey}&app=${app}&country=${country}`
         ).then(async (res) => {
-            console.log(res);
             if (res.ok) {
-                console.log('this');
                 const result = await res.json();
                 console.log(result);
                 if (result) {
                     resolve(res);
                 }
             }
-            console.log('this');
             reject(res);
         });
     });
@@ -43,11 +40,12 @@ export const getMessage = async (params, number) => {
         fetch(
             `http://api.smspincode.com/user/api/get_sms.php?customer=${apikey}&number=${number}&app=${app}&country=${country}`
         ).then(async (res) => {
-            console.log(res);
             if (res.ok) {
                 const result = await res.json();
-                console.log(result);
-                resolve(result);
+                if (result) {
+                    console.log(result);
+                    resolve(result);
+                }
             }
             reject(res);
         });
@@ -55,10 +53,9 @@ export const getMessage = async (params, number) => {
 };
 
 export const getMoney = async (params, number) => {
-    const { apikey, app, country } = params;
+    const { apikey } = params;
     return new Promise((resolve, reject) => {
         fetch(`https://api.smspincode.com/user/api/get_balance.php?customer=${apikey}`).then(async (res) => {
-            console.log(res);
             if (res.ok) {
                 const result = await res.json();
                 if (result) {

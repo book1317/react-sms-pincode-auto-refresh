@@ -6,6 +6,10 @@ class Item extends React.Component {
     refreshTime = 3000;
     state = { isRefresh: false, time: 3 };
 
+    componentWillUnmount() {
+        clearInterval(this.getMessageInterval);
+    }
+
     getMessage = async (number) => {
         await this.props.getMessage(number, this.callback);
     };
@@ -57,7 +61,7 @@ class Item extends React.Component {
                 </td>
 
                 <td>
-                    <CopyButton>{item.number}</CopyButton>
+                    <CopyButton>{`+${item.number}`}</CopyButton>
                 </td>
                 <td className="itemCode">
                     <div>{item.message}</div>

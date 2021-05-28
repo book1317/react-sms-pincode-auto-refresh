@@ -35,7 +35,9 @@ class App extends React.Component {
         const address3 = urlParams.get('address3');
         const params = { apikey, app, country, address1, address2, address3 };
 
-        await this.setState({ params });
+        const money = await getMoney(params);
+
+        await this.setState({ params, money });
         await this.refresh();
     }
 
@@ -55,9 +57,8 @@ class App extends React.Component {
             const { params } = this.state;
 
             this.setState({ isLoading: true });
-            const money = await getMoney(params);
             const allNumber = await getAllNumber(params);
-            this.setState({ allNumber, money });
+            this.setState({ allNumber });
         } catch (err) {
             this.setErrorMessage(err);
         }
@@ -70,7 +71,6 @@ class App extends React.Component {
             const result = await getNewNumber(params);
 
             if (result) {
-                console.log('result', result);
                 this.setState({ isGetNumber: false });
                 clearInterval(this.getNumberInterval);
                 this.refresh();
@@ -87,13 +87,11 @@ class App extends React.Component {
             const result = await getMessage(params, number);
 
             if (result) {
-                console.log(result);
                 callback();
                 this.refresh();
                 this.playSound();
             }
         } catch (err) {
-            console.log('catch');
             this.setErrorMessage(err);
         }
     };
@@ -227,15 +225,14 @@ class App extends React.Component {
                         <span className="redText">address3</span>
                     </div>
 
-                    <a
-                        style={{ marginTop: '10px', display: 'block' }}
+                    <div
+                        style={{ marginTop: '10px', display: 'block', cursor: 'pointer' }}
                         onClick={() => {
                             window.open('https://www.foodpanda.co.th/contents/deals');
                         }}
-                        href="#"
                     >
                         https://www.foodpanda.co.th/contents/deals
-                    </a>
+                    </div>
                 </div>
             </div>
         );
