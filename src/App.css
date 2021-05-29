@@ -113,3 +113,23 @@ table {
     font-weight: 500;
     margin-bottom: 10px;
 }
+
+.headerContainer {
+    display: flex;
+}
+
+.leftHeader {
+    width: 25%;
+}
+
+.middleHeader {
+    min-width: 50%;
+}
+
+.rightHeader {
+    width: 25%;
+}
+
+.typeButton {
+    border-radius: 6px;
+}

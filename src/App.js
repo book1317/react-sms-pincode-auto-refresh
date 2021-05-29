@@ -3,6 +3,7 @@ import { getNewNumber, getAllNumber, getMessage, getMoney } from './API';
 import './App.css';
 import Item from './Item';
 import CopyButton from './CopyButton';
+import TypeButton from './TypeButton';
 
 class App extends React.Component {
     getNumberInterval;
@@ -53,6 +54,7 @@ class App extends React.Component {
     };
 
     refresh = async () => {
+        console.log('refresh');
         try {
             const { params } = this.state;
 
@@ -81,18 +83,18 @@ class App extends React.Component {
         }
     };
 
-    getMessage = async (number, callback) => {
+    getMessage = async (number, message, callback) => {
         try {
             const { params } = this.state;
-            const result = await getMessage(params, number);
-
-            if (result) {
-                callback();
-                this.refresh();
-                this.playSound();
-            }
+            await getMessage(params, number);
         } catch (err) {
             this.setErrorMessage(err);
+        } finally {
+            await this.refresh();
+            if (message) {
+                callback();
+                this.playSound();
+            }
         }
     };
 
@@ -123,41 +125,57 @@ class App extends React.Component {
 
         return (
             <div className="App">
-                <div className="title">BooKy SMS Pincode</div>
-                <div className="subTitle">
-                    <div>
-                        Key :{' '}
-                        {apikey ? (
-                            apikey
-                        ) : (
-                            <span>
-                                {'ไปใส่ APIKey ด้วย -> '}
-                                <a href="https://smspincode.com/user/settings.php">
-                                    https://smspincode.com/user/settings.php
-                                </a>
-                            </span>
-                        )}
+                <div className="headerContainer">
+                    <div className="leftHeader">
+                        <div>
+                            {/* <TypeButton params={params} type="app">
+                                foodpanda
+                            </TypeButton> */}
+                        </div>
                     </div>
-                    <div>
-                        {app} : {country}
+
+                    <div className="middleHeader">
+                        <div className="title">BooKy SMS Pincode</div>
+                        <div className="subTitle">
+                            <div>
+                                Key :{' '}
+                                {apikey ? (
+                                    apikey
+                                ) : (
+                                    <span>
+                                        {'ไปใส่ APIKey ด้วย -> '}
+                                        <a href="https://smspincode.com/user/settings.php">
+                                            https://smspincode.com/user/settings.php
+                                        </a>
+                                    </span>
+                                )}
+                            </div>
+                            <div>
+                                {app} : {country}
+                            </div>
+                            <div className="greenText">Money : {money}$</div>
+                        </div>
+                        {/* <Input label="API Key" /> */}
+                        <button onClick={this.onClickGetNewNumber}>
+                            Get Number{isGetNumber && ':' + timeGetNumber}
+                        </button>
+                        <button className="refreshButton" onClick={this.refresh}>
+                            Refresh
+                        </button>
+                        <button
+                            className="refreshButton"
+                            onClick={() => {
+                                window.location.reload();
+                            }}
+                        >
+                            Stop all
+                        </button>
+                        <span className="loading">{isLoading && 'Loading...'}</span>
+                        {lastErrorMessage && <div className="errorMessage">Last Error : {lastErrorMessage}</div>}
                     </div>
-                    <div className="greenText">Money : {money}$</div>
+
+                    <div className="rightHeader"></div>
                 </div>
-                {/* <Input label="API Key" /> */}
-                <button onClick={this.onClickGetNewNumber}>Get Number{isGetNumber && ':' + timeGetNumber}</button>
-                <button className="refreshButton" onClick={this.refresh}>
-                    Refresh
-                </button>
-                <button
-                    className="refreshButton"
-                    onClick={() => {
-                        window.location.reload();
-                    }}
-                >
-                    Stop all
-                </button>
-                <span className="loading">{isLoading && 'Loading...'}</span>
-                {lastErrorMessage && <div className="errorMessage">Last Error : {lastErrorMessage}</div>}
 
                 <div className="table">
                     <table>

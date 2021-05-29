@@ -23,7 +23,6 @@ export const getAllNumber = async (params) => {
             .then((res) => res.json())
             .then(
                 (result) => {
-                    console.log(result);
                     resolve(result);
                 },
                 (error) => {
