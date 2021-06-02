@@ -208,6 +208,10 @@ class App extends React.Component {
                     </CopyButton>
                     <CopyButton>HOORAY100</CopyButton>
                     <CopyButton>FPDSS100</CopyButton>
+                    <CopyButton>NEWGRAB</CopyButton>
+                    <CopyButton>OMG80</CopyButton>
+                    <CopyButton>HALF100</CopyButton>
+                    <CopyButton>GBNEW</CopyButton>
                     <CopyButton>godoffood001@gmail.com</CopyButton>
                 </div>
 
@@ -243,14 +247,12 @@ class App extends React.Component {
                         <span className="redText">address3</span>
                     </div>
 
-                    <div
+                    <a
                         style={{ marginTop: '10px', display: 'block', cursor: 'pointer' }}
-                        onClick={() => {
-                            window.open('https://www.foodpanda.co.th/contents/deals');
-                        }}
+                        href="https://www.foodpanda.co.th/contents/deals"
                     >
                         https://www.foodpanda.co.th/contents/deals
-                    </div>
+                    </a>
                 </div>
             </div>
         );
