@@ -11,7 +11,11 @@ class Item extends React.Component {
     }
 
     getMessage = async (number, message) => {
-        await this.props.getMessage(number, message, this.callback);
+        try {
+            await this.props.getMessage(number, message, this.callback);
+        } catch (err) {
+            console.log('err on item', err);
+        }
     };
 
     callback = () => {

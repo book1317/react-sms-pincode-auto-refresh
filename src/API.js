@@ -34,21 +34,25 @@ export const getAllNumber = async (params) => {
 };
 
 export const getMessage = async (params, number) => {
-    const { apikey, app, country } = params;
-    return new Promise((resolve, reject) => {
-        fetch(
-            `http://api.smspincode.com/user/api/get_sms.php?customer=${apikey}&number=${number}&app=${app}&country=${country}`
-        ).then(async (res) => {
-            if (res.ok) {
-                const result = await res.json();
-                if (result) {
-                    console.log(result);
-                    resolve(result);
+    try {
+        const { apikey, app, country } = params;
+        return new Promise((resolve, reject) => {
+            fetch(
+                `http://api.smspincode.com/user/api/get_sms.php?customer=${apikey}&number=${number}&app=${app}&country=${country}`
+            ).then(async (res) => {
+                if (res.ok) {
+                    const result = await res.json();
+                    if (result) {
+                        console.log(result);
+                        resolve(result);
+                    }
                 }
-            }
-            reject(res);
+                reject(res);
+            });
         });
-    });
+    } catch (err) {
+        console.log('err on API', err);
+    }
 };
 
 export const getMoney = async (params, number) => {

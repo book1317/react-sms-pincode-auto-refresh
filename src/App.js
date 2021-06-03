@@ -88,6 +88,7 @@ class App extends React.Component {
             const { params } = this.state;
             await getMessage(params, number);
         } catch (err) {
+            console.log('err on App');
             this.setErrorMessage(err);
         } finally {
             await this.refresh();
