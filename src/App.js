@@ -236,7 +236,12 @@ class App extends React.Component {
                             </tr>
                             {allNumber.length > 0 &&
                                 allNumber.map((item) => (
-                                    <Item key={item.timestamp} item={item} getMessage={this.getMessage} />
+                                    <Item
+                                        key={item.timestamp}
+                                        item={item}
+                                        getMessage={this.getMessage}
+                                        onCopied={this.onCopy}
+                                    />
                                 ))}
                         </tbody>
                     </table>

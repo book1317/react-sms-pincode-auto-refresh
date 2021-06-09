@@ -65,7 +65,13 @@ class Item extends React.Component {
                 </td>
 
                 <td>
-                    <CopyButton>{`+${item.number}`}</CopyButton>
+                    <CopyButton
+                        onCopied={(text) => {
+                            if (this.props.onCopied) {
+                                this.props.onCopied(text);
+                            }
+                        }}
+                    >{`+${item.number}`}</CopyButton>
                 </td>
                 <td className="itemCode">
                     <div>{item.message}</div>
