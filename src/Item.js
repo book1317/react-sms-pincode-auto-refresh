@@ -10,9 +10,10 @@ class Item extends React.Component {
         clearInterval(this.getMessageInterval);
     }
 
-    getMessage = async (number, message) => {
+    getMessage = async (number) => {
+        const { item } = this.props;
         try {
-            await this.props.getMessage(number, message, this.callback);
+            await this.props.getMessage(number, item.message, this.callback);
         } catch (err) {
             console.log('err on item', err);
         }
@@ -23,14 +24,14 @@ class Item extends React.Component {
         this.setState({ isRefresh: false });
     };
 
-    onClickGetMessage = async (number, message) => {
+    onClickGetMessage = async (number) => {
         const { isRefresh } = this.state;
         this.setState({ isRefresh: !isRefresh });
 
         if (isRefresh) {
             clearInterval(this.getMessageInterval);
         } else {
-            this.getMessage(number, message);
+            this.getMessage(number);
             this.getMessageInterval = setInterval(async () => {
                 const { time } = this.state;
                 if (time === 0) {
@@ -38,7 +39,7 @@ class Item extends React.Component {
                 } else {
                     this.setState({ time: time - 1 });
                     if (time === 1) {
-                        this.getMessage(number, message);
+                        this.getMessage(number);
                     }
                 }
             }, 1000);
@@ -55,7 +56,7 @@ class Item extends React.Component {
                         <button
                             className="getButton"
                             onClick={() => {
-                                this.onClickGetMessage(item.number, item.message);
+                                this.onClickGetMessage(item.number);
                             }}
                         >
                             {isRefresh ? 'Get:' + time : 'Get'}

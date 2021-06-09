@@ -13,9 +13,12 @@ class CopyButton extends Component {
             <div>
                 <div
                     style={{ color: isCopy ? 'green' : '' }}
-                    className="copyButton"
+                    className={'copyButton'}
                     onClick={() => {
                         this.setState({ isCopy: true });
+                        if (this.props.onCopied) {
+                            this.props.onCopied(children);
+                        }
                         navigator.clipboard.writeText(children);
                     }}
                 >

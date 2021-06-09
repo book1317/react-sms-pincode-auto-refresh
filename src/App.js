@@ -8,6 +8,9 @@ import TypeButton from './TypeButton';
 class App extends React.Component {
     getNumberInterval;
     sound = new Audio('https://smspincode.com/user/plucky.mp3');
+    inputEmail = '';
+    urlParams = new URLSearchParams(window.location.search);
+    copyTimeout;
 
     state = {
         params: {
@@ -24,10 +27,15 @@ class App extends React.Component {
         isGetNumber: false,
         lastErrorMessage: '',
         money: '',
+        email: '',
+        emailCount: 0,
+        showCopy: false,
     };
 
     async componentDidMount() {
-        const urlParams = new URLSearchParams(window.location.search);
+        const urlParams = this.urlParams;
+        const email = urlParams.get('email') || 'ilovegrab';
+        const emailCount = parseInt(urlParams.get('emailCount')) || 0;
         const apikey = urlParams.get('key');
         const app = urlParams.get('app') || 'foodpanda';
         const country = urlParams.get('country') || 'thailand';
@@ -38,7 +46,7 @@ class App extends React.Component {
 
         const money = await getMoney(params);
 
-        await this.setState({ params, money });
+        await this.setState({ params, money, email, emailCount });
         await this.refresh();
     }
 
@@ -90,12 +98,11 @@ class App extends React.Component {
         } catch (err) {
             console.log('err on App');
             this.setErrorMessage(err);
-        } finally {
-            await this.refresh();
-            if (message) {
-                callback();
-                this.playSound();
-            }
+        }
+        await this.refresh();
+        if (message) {
+            callback();
+            this.playSound();
         }
     };
 
@@ -120,12 +127,45 @@ class App extends React.Component {
         this.setState({ isGetNumber: !isGetNumber });
     };
 
+    setParams = (key, value) => {
+        this.urlParams.set(key, value);
+    };
+
+    replaceParams = () => {
+        const newParams = this.urlParams.toString();
+        const newURL = window.location.origin + '/?' + newParams;
+        window.location.replace(newURL);
+    };
+
+    onCopy = async (copyText) => {
+        clearTimeout(this.copyTimeout);
+        this.setState({ showCopy: true, copyText });
+        this.copyTimeout = setTimeout(() => {
+            this.setState({ showCopy: false });
+        }, 1000);
+    };
+
     render() {
-        const { allNumber, isLoading, isGetNumber, timeGetNumber, params, lastErrorMessage, money } = this.state;
+        const {
+            allNumber,
+            isLoading,
+            isGetNumber,
+            timeGetNumber,
+            params,
+            lastErrorMessage,
+            money,
+            email,
+            emailCount,
+            showCopy,
+            copyText,
+        } = this.state;
         const { apikey, app, country, address1, address2, address3 } = params;
 
         return (
             <div className="App">
+                <div style={{ opacity: showCopy ? 1 : 0 }} className="copyBox">
+                    Copy : {copyText}
+                </div>
                 <div className="headerContainer">
                     <div className="leftHeader">
                         <div>
@@ -199,21 +239,67 @@ class App extends React.Component {
 
                 <div className="howto">
                     <div className="howtoTitle">ข้อมูล {'(กดเพื่อคัดลอก)'}</div>
-                    <CopyButton>
+                    <CopyButton onCopied={this.onCopy}>
                         {address1 || '19 Lat Phrao 1 Alley, Lane 8 Khwaeng Chom Phon Krung Thep Maha Nakhon 10900'}
                     </CopyButton>
-                    <CopyButton>{address2 || 'สมคิดแมนชั่น ตึกสีเทา'}</CopyButton>
-                    <CopyButton>
+                    <CopyButton onCopied={this.onCopy}>{address2 || 'สมคิดแมนชั่น ตึกสีเทา'}</CopyButton>
+                    <CopyButton onCopied={this.onCopy}>
                         {address3 ||
                             'ลาดพร้ว ซ.1 แยก 8 เกือบสุดซอย หน้าตึกเขียนว่าสมคิดแมนชั่น ถึงแล้วโทรมาเบอร์นี้ 0884015974 ครับ'}
                     </CopyButton>
-                    <CopyButton>HOORAY100</CopyButton>
-                    <CopyButton>FPDSS100</CopyButton>
-                    <CopyButton>NEWGRAB</CopyButton>
-                    <CopyButton>OMG80</CopyButton>
-                    <CopyButton>HALF100</CopyButton>
-                    <CopyButton>GBNEW</CopyButton>
-                    <CopyButton>godoffood001@gmail.com</CopyButton>
+                </div>
+
+                <div className="howto">
+                    <div className="howtoTitle">โค๊ดส่วนลด</div>
+                    <CopyButton onCopied={this.onCopy}>HOORAY100</CopyButton>
+                    <CopyButton onCopied={this.onCopy}>FPDSS100</CopyButton>
+                    <CopyButton onCopied={this.onCopy}>NEWGRAB</CopyButton>
+                    <CopyButton onCopied={this.onCopy}>OMG80</CopyButton>
+                    <CopyButton onCopied={this.onCopy}>HALF100</CopyButton>
+                    <CopyButton onCopied={this.onCopy}>GBNEW</CopyButton>
+                </div>
+
+                <div className="howto">
+                    <div className="howtoTitle">Account</div>
+                    <input
+                        onChange={(e) => {
+                            this.setState({ email: e.target.value });
+                        }}
+                    />
+                    <span style={{ marginLeft: '3px' }}>@gmail.com</span>
+                    <button
+                        style={{ marginLeft: '6px' }}
+                        onClick={() => {
+                            this.setParams('email', email);
+                            this.setParams('emailCount', 0);
+                            this.replaceParams();
+                            this.setState({ emailCount: 0, email });
+                        }}
+                    >
+                        save
+                    </button>
+                    <div>
+                        <div className={'emailCount'}>
+                            <CopyButton onCopied={this.onCopy}>
+                                {email}
+                                {emailCount.toString().padStart(3, '0')}@gmail.com
+                            </CopyButton>
+                            <button
+                                className={'countButton'}
+                                onClick={() => {
+                                    let newEmailCount = emailCount + 1;
+                                    this.setParams('emailCount', newEmailCount);
+                                    this.replaceParams();
+                                    this.setState({ emailCount: newEmailCount });
+                                }}
+                            >
+                                +
+                            </button>
+                        </div>
+                    </div>
+                    <CopyButton onCopied={this.onCopy}>Ilove</CopyButton>
+                    <CopyButton onCopied={this.onCopy}>Foodpanda</CopyButton>
+                    <CopyButton onCopied={this.onCopy}>13171317</CopyButton>
                 </div>
 
                 <div className="howto">

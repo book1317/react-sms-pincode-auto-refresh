@@ -1,4 +1,5 @@
 .App {
+    position: relative;
     padding: 26px;
     text-align: center;
 }
@@ -132,4 +133,29 @@ table {
 
 .typeButton {
     border-radius: 6px;
+}
+
+.emailCount {
+    display: flex;
+    margin-top: 4px;
+}
+
+.countButton {
+    margin-left: 3px;
+}
+
+.copyBox {
+    position: absolute;
+    padding: 20px;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    min-height: 20px;
+    background-color: rgb(43, 43, 43);
+    color: white;
+    z-index: 1;
+    background-color: 20px;
+    transition: 0.3s;
+    border-radius: 6px;
+    font-weight: 500;
 }
