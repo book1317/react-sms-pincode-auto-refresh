@@ -30,12 +30,16 @@ class App extends React.Component {
         email: '',
         emailCount: 0,
         showCopy: false,
+        isEnableAutoPlus: false,
     };
 
     async componentDidMount() {
         const urlParams = this.urlParams;
-        const email = urlParams.get('email') || 'ilovegrab';
-        const emailCount = parseInt(urlParams.get('emailCount')) || 0;
+        const email = localStorage.getItem('email');
+        const emailCount = parseInt(localStorage.getItem('emailCount')) || 0;
+        const isEnableAutoPlus = parseInt(localStorage.getItem('isEnableAutoPlus')) === 1;
+        // const email = urlParams.get('email') || 'ilovegrab';
+        // const emailCount = parseInt(urlParams.get('emailCount')) || 0;
         const apikey = urlParams.get('key');
         const app = urlParams.get('app') || 'foodpanda';
         const country = urlParams.get('country') || 'thailand';
@@ -46,7 +50,7 @@ class App extends React.Component {
 
         const money = await getMoney(params);
 
-        await this.setState({ params, money, email, emailCount });
+        await this.setState({ params, money, email, emailCount, isEnableAutoPlus });
         await this.refresh();
     }
 
@@ -133,7 +137,7 @@ class App extends React.Component {
 
     replaceParams = () => {
         const newParams = this.urlParams.toString();
-        const newURL = window.location.origin + '/?' + newParams;
+        const newURL = window.location.origin + window.location.pathname + '?' + newParams;
         window.location.replace(newURL);
     };
 
@@ -158,6 +162,7 @@ class App extends React.Component {
             emailCount,
             showCopy,
             copyText,
+            isEnableAutoPlus,
         } = this.state;
         const { apikey, app, country, address1, address2, address3 } = params;
 
@@ -270,30 +275,57 @@ class App extends React.Component {
                     <button
                         style={{ marginLeft: '6px' }}
                         onClick={() => {
-                            this.setParams('email', email);
-                            this.setParams('emailCount', 0);
-                            this.replaceParams();
+                            if (email) {
+                                localStorage.setItem('email', email);
+                            } else {
+                                localStorage.removeItem('email');
+                            }
+                            localStorage.setItem('emailCount', 0);
                             this.setState({ emailCount: 0, email });
+
+                            // this.setParams('email', email);
+                            // this.setParams('emailCount', 0);
+                            // this.replaceParams();
                         }}
                     >
                         save
                     </button>
                     <div>
                         <div className={'emailCount'}>
-                            <CopyButton onCopied={this.onCopy}>
-                                {email}
-                                {emailCount.toString().padStart(3, '0')}@gmail.com
-                            </CopyButton>
+                            <div
+                                onClick={() => {
+                                    if (isEnableAutoPlus) {
+                                        const newEmailCount = emailCount + 1;
+                                        localStorage.setItem('emailCount', newEmailCount);
+                                        this.setState({ emailCount: newEmailCount });
+                                    }
+                                }}
+                            >
+                                <CopyButton onCopied={this.onCopy}>
+                                    {email || 'ilovegrab'}
+                                    {emailCount.toString().padStart(3, '0')}@gmail.com
+                                </CopyButton>
+                            </div>
                             <button
                                 className={'countButton'}
                                 onClick={() => {
-                                    let newEmailCount = emailCount + 1;
-                                    this.setParams('emailCount', newEmailCount);
-                                    this.replaceParams();
+                                    const newEmailCount = emailCount + 1;
+                                    localStorage.setItem('emailCount', newEmailCount);
                                     this.setState({ emailCount: newEmailCount });
+                                    // this.setParams('emailCount', newEmailCount);
+                                    // this.replaceParams();
                                 }}
                             >
                                 +
+                            </button>
+                            <button
+                                className={'countButton'}
+                                onClick={() => {
+                                    localStorage.setItem('isEnableAutoPlus', !isEnableAutoPlus ? 1 : 0);
+                                    this.setState({ isEnableAutoPlus: !isEnableAutoPlus });
+                                }}
+                            >
+                                Auto + : {isEnableAutoPlus ? 'On' : 'Off'}
                             </button>
                         </div>
                     </div>

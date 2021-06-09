@@ -145,7 +145,7 @@ table {
 }
 
 .copyBox {
-    position: absolute;
+    position: fixed;
     padding: 20px;
     top: 10px;
     left: 10px;
