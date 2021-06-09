@@ -309,6 +309,21 @@ class App extends React.Component {
                             <button
                                 className={'countButton'}
                                 onClick={() => {
+                                    const newEmailCount = emailCount - 1;
+                                    if (newEmailCount >= 0) {
+                                        localStorage.setItem('emailCount', newEmailCount);
+                                        this.setState({ emailCount: newEmailCount });
+                                    }
+
+                                    // this.setParams('emailCount', newEmailCount);
+                                    // this.replaceParams();
+                                }}
+                            >
+                                -
+                            </button>
+                            <button
+                                className={'countButton'}
+                                onClick={() => {
                                     const newEmailCount = emailCount + 1;
                                     localStorage.setItem('emailCount', newEmailCount);
                                     this.setState({ emailCount: newEmailCount });
