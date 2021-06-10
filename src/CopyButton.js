@@ -12,7 +12,7 @@ class CopyButton extends Component {
         return (
             <div>
                 <div
-                    style={{ color: isCopy ? 'green' : '' }}
+                    style={{ color: isCopy ? '#D3D3D3' : '' }}
                     className={'copyButton'}
                     onClick={() => {
                         this.setState({ isCopy: true });

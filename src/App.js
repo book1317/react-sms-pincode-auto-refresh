@@ -354,6 +354,17 @@ class App extends React.Component {
                 </div>
 
                 <div className="howto">
+                    <div className="howtoTitle">ร้านอาหาร</div>
+                    <CopyButton onCopied={this.onCopy}>Shinkanzen</CopyButton>
+                    <CopyButton onCopied={this.onCopy}>Eat Am Are</CopyButton>
+                    <CopyButton onCopied={this.onCopy}>McDonald</CopyButton>
+                    <CopyButton onCopied={this.onCopy}>Bonchon</CopyButton>
+                    <CopyButton onCopied={this.onCopy}>Chester</CopyButton>
+                    <CopyButton onCopied={this.onCopy}>Boon Tong Kee</CopyButton>
+                    <CopyButton onCopied={this.onCopy}>Khao Man Gai Chakkraphadi</CopyButton>
+                </div>
+
+                <div className="howto">
                     <div className="howtoTitle">วิธีใช้ ใส่ลิงค์ตามนี้</div>
                     <div className="example">
                         https://book1317.github.io/react-sms-pincode-auto-refresh?key=
