@@ -307,8 +307,7 @@ class App extends React.Component {
                                 }}
                             >
                                 <CopyButton onCopied={this.onCopy}>
-                                    {email || 'ilovegrab'}
-                                    {emailCount.toString().padStart(3, '0')}@gmail.com
+                                    {`${email || 'ilovegrab'}${emailCount.toString().padStart(3, '0')}@gmail.com`}
                                 </CopyButton>
                             </div>
                             <button
