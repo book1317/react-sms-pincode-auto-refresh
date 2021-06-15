@@ -8,7 +8,6 @@ import TypeButton from './TypeButton';
 class App extends React.Component {
     getNumberInterval;
     sound = new Audio('https://smspincode.com/user/plucky.mp3');
-    inputEmail = '';
     urlParams = new URLSearchParams(window.location.search);
     copyTimeout;
 
@@ -261,8 +260,8 @@ class App extends React.Component {
 
                 <div className="howto">
                     <div className="howtoTitle">โค๊ดส่วนลด</div>
-                    <CopyButton onCopied={this.onCopy}>HOORAY100</CopyButton>
-                    <CopyButton onCopied={this.onCopy}>FPDSS100</CopyButton>
+                    <CopyButton onCopied={this.onCopy}>HOORAY200</CopyButton>
+                    <CopyButton onCopied={this.onCopy}>PANDAMART35</CopyButton>
                     <CopyButton onCopied={this.onCopy}>NEWGRAB</CopyButton>
                     <CopyButton onCopied={this.onCopy}>OMG80</CopyButton>
                     <CopyButton onCopied={this.onCopy}>HALF100</CopyButton>
