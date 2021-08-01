@@ -249,19 +249,19 @@ class App extends React.Component {
                 <div className="howto">
                     <div className="howtoTitle">ข้อมูล {'(กดเพื่อคัดลอก)'}</div>
                     <CopyButton onCopied={this.onCopy}>
-                        {address1 || '19 Lat Phrao 1 Alley, Lane 8 Khwaeng Chom Phon Krung Thep Maha Nakhon 10900'}
+                        {address1 || '11 ซอย ลาดพร้าว 1 Khwaeng Chom Phon Krung Thep Maha Nakhon 10900'}
                     </CopyButton>
-                    <CopyButton onCopied={this.onCopy}>{address2 || 'สมคิดแมนชั่น ตึกสีเทา'}</CopyButton>
+                    <CopyButton onCopied={this.onCopy}>{address2 || 'Gladden Condo'}</CopyButton>
                     <CopyButton onCopied={this.onCopy}>
-                        {address3 ||
-                            'ลาดพร้ว ซ.1 แยก 8 เกือบสุดซอย หน้าตึกเขียนว่าสมคิดแมนชั่น ถึงแล้วโทรมาเบอร์นี้ 0884015974 ครับ'}
+                        {address3 || 'คอนโด แกลดเดิ่น ลาดพร้าวซ. 1 ถึงแล้วโทรมาเบอร์นี้ 0884015974 ครับ'}
                     </CopyButton>
                 </div>
 
                 <div className="howto">
                     <div className="howtoTitle">โค๊ดส่วนลด</div>
                     <CopyButton onCopied={this.onCopy}>HOORAY200</CopyButton>
-                    <CopyButton onCopied={this.onCopy}>PANDAMART35</CopyButton>
+                    <CopyButton onCopied={this.onCopy}>MARTUP</CopyButton>
+                    <CopyButton onCopied={this.onCopy}>SAIFAH30</CopyButton>
                     <CopyButton onCopied={this.onCopy}>NEWGRAB</CopyButton>
                     <CopyButton onCopied={this.onCopy}>OMG80</CopyButton>
                     <CopyButton onCopied={this.onCopy}>HALF100</CopyButton>
