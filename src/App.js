@@ -249,7 +249,7 @@ class App extends React.Component {
                 <div className="howto">
                     <div className="howtoTitle">ข้อมูล {'(กดเพื่อคัดลอก)'}</div>
                     <CopyButton onCopied={this.onCopy}>
-                        {address1 || '11 ซอย ลาดพร้าว 1 Khwaeng Chom Phon Krung Thep Maha Nakhon 10900'}
+                        {address1 || '178 ซอย ลาดพร้าว 1 Khwaeng Chom Phon Krung Thep Maha Nakhon 10900'}
                     </CopyButton>
                     <CopyButton onCopied={this.onCopy}>{address2 || 'Gladden Condo'}</CopyButton>
                     <CopyButton onCopied={this.onCopy}>
