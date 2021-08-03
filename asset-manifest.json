@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/react-sms-pincode-auto-refresh/static/css/main.8bf35b96.chunk.css",
-    "main.js": "/react-sms-pincode-auto-refresh/static/js/main.b58464e3.chunk.js",
-    "main.js.map": "/react-sms-pincode-auto-refresh/static/js/main.b58464e3.chunk.js.map",
+    "main.js": "/react-sms-pincode-auto-refresh/static/js/main.9352d9bd.chunk.js",
+    "main.js.map": "/react-sms-pincode-auto-refresh/static/js/main.9352d9bd.chunk.js.map",
     "runtime-main.js": "/react-sms-pincode-auto-refresh/static/js/runtime-main.d72babd9.js",
     "runtime-main.js.map": "/react-sms-pincode-auto-refresh/static/js/runtime-main.d72babd9.js.map",
     "static/js/2.05cf0975.chunk.js": "/react-sms-pincode-auto-refresh/static/js/2.05cf0975.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.d72babd9.js",
     "static/js/2.05cf0975.chunk.js",
     "static/css/main.8bf35b96.chunk.css",
-    "static/js/main.b58464e3.chunk.js"
+    "static/js/main.9352d9bd.chunk.js"
   ]
 }
