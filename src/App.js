@@ -253,19 +253,15 @@ class App extends React.Component {
                     </CopyButton>
                     <CopyButton onCopied={this.onCopy}>{address2 || 'Gladden Condo'}</CopyButton>
                     <CopyButton onCopied={this.onCopy}>
-                        {address3 || 'คอนโด แกลดเดิ่น ลาดพร้าวซ. 1 ถึงแล้วโทรมาเบอร์นี้ 0884015974 ครับ'}
+                        {address3 || 'คอนโดสีเทา 8 ชั้น ลาดพร้าวซ. 1 ถึงแล้วโทรมาเบอร์นี้ 0884015974 ครับ'}
                     </CopyButton>
                 </div>
 
                 <div className="howto">
                     <div className="howtoTitle">โค๊ดส่วนลด</div>
-                    <CopyButton onCopied={this.onCopy}>HOORAY200</CopyButton>
-                    <CopyButton onCopied={this.onCopy}>MARTUP</CopyButton>
-                    <CopyButton onCopied={this.onCopy}>SAIFAH30</CopyButton>
-                    <CopyButton onCopied={this.onCopy}>NEWGRAB</CopyButton>
-                    <CopyButton onCopied={this.onCopy}>OMG80</CopyButton>
-                    <CopyButton onCopied={this.onCopy}>HALF100</CopyButton>
-                    <CopyButton onCopied={this.onCopy}>GBNEW</CopyButton>
+                    <CopyButton onCopied={this.onCopy}>WOW200</CopyButton>
+                    <CopyButton onCopied={this.onCopy}>MARTSMILE</CopyButton>
+                    <CopyButton onCopied={this.onCopy}>SHOPAWAY</CopyButton>
                 </div>
 
                 <div className="howto">
@@ -347,13 +343,14 @@ class App extends React.Component {
                             </button>
                         </div>
                     </div>
-                    <CopyButton onCopied={this.onCopy}>Ilove</CopyButton>
-                    <CopyButton onCopied={this.onCopy}>Foodpanda</CopyButton>
+                    <CopyButton onCopied={this.onCopy}>Jason</CopyButton>
+                    <CopyButton onCopied={this.onCopy}>Script</CopyButton>
                     <CopyButton onCopied={this.onCopy}>13171317</CopyButton>
                 </div>
 
                 <div className="howto">
                     <div className="howtoTitle">ร้านอาหาร</div>
+                    <CopyButton onCopied={this.onCopy}>คุ้มสึ</CopyButton>
                     <CopyButton onCopied={this.onCopy}>Shinkanzen</CopyButton>
                     <CopyButton onCopied={this.onCopy}>Eat Am Are</CopyButton>
                     <CopyButton onCopied={this.onCopy}>McDonald</CopyButton>
